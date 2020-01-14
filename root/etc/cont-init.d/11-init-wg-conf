@@ -1,0 +1,14 @@
+#!/usr/bin/with-contenv bash
+
+printf "[Interface]\nPrivateKey = " > /etc/wireguard/wg0.conf
+
+if [ -z $WG_PRIVKEY ]; then
+	wg genkey | tee -a /etc/wireguard/wg0.conf | wg pubkey > $HOME/pubkey
+else
+	echo $WG_PRIVKEY >> /etc/wireguard/wg0.conf
+	echo $WG_PRIVKEY | wg pubkey > $HOME/pubkey
+fi
+printf "ListenPort = 51820\n\n" >> /etc/wireguard/wg0.conf
+
+cat $HOME/pubkey
+rm $HOME/pubkey

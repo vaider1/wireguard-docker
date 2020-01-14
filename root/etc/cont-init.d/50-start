@@ -1,0 +1,4 @@
+#!/usr/bin/with-contenv bash
+
+wg-quick up wg0
+ip addr add $WG_ROUTER_IP dev wg0
