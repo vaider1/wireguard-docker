@@ -1,0 +1,4 @@
+#!/usr/bin/with-contenv bash
+
+ip addr del $WG_ROUTER_IP dev wg0
+wg-quick down wg0
