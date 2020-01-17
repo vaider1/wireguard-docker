@@ -1,6 +1,8 @@
 # Wireguard-Docker
 A Docker image of Wireguard VPN router based on an Alpine Linux image created by linuxserver.io
 
+[Docker Hub image](https://hub.docker.com/r/vaider1/wireguard-docker)
+
 ## Overview
 Super simple to use Docker image that creates a VPN server based on Wireguard.
 
@@ -30,12 +32,6 @@ Wireguard kernel module - The container guest depends on the kernel modules of t
 # Usage
 The containers logs will print the public key of the server each start to provide to the clients.
 
-## Build example
-Working folder should be where the Dockerfile is
-```
-docker image build -t wireguard_router:1.0 .
-```
-
 ## Docker example
 ```
 docker create \
@@ -48,7 +44,7 @@ docker create \
   -e WG_ROUTER_IP=192.168.7.254/32 \
   -e WG_PRIVKEY=** Private Key ** \
   -p 51820:51820/udp \
-  wireguard_router:1.0
+  vaider1/wireguard-docker:latest
 ```
 
 ## Docker-compose example
@@ -56,7 +52,7 @@ docker create \
 version: "3.3"
 services:
   wireguard:
-    image: wireguard_router:1.0
+    image: vaider1/wireguard-docker:latest
     cap_add:
     - NET_ADMIN
     container_name: wireguard
@@ -69,7 +65,7 @@ services:
     volumes:
     - /home/john/containers/wireguard/config:/config
     ports:
-    - "51820:58120/udp"
+    - "51820:51820/udp"
     restart: unless-stopped
 networks:
   default:
