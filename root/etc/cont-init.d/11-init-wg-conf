@@ -9,7 +9,7 @@ else
 	pubk=$(echo $WG_PRIVKEY | wg pubkey)
 fi
 printf "ListenPort = 51820\n" >> /etc/wireguard/wg0.conf
-printf "PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE\n >> /etc/wireguard/wg0.conf
+printf "PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE\n" >> /etc/wireguard/wg0.conf
 printf "PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE\n\n" >> /etc/wireguard/wg0.conf
 
 echo The public key is: $pubk
